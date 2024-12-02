@@ -182,6 +182,8 @@ project/
 ## Running the Project
 
 ### Requirements
+Python 3.12.7
+
 ```bash
 pip install -r requirements.txt
 ```
@@ -199,7 +201,7 @@ This will:
 
 ### Inference
 ```bash
-streamlit python inference.py 
+streamlit run inference.py 
 ```
 This will give a visual interface for inference. It can:
 1. Load the saved models.
