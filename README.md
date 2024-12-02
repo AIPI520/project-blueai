@@ -173,6 +173,9 @@ project/
 │   ├── xgboost_optimizer.py
 │   └── deep_learning_optimizer.py
 ├── main.py
+├── inference.py
+├── requirements.txt
+├── Housing01.csv
 └── README.md
 ```
 
@@ -196,12 +199,12 @@ This will:
 
 ### Inference
 ```bash
-python inference.py --input path/to/input/data.csv
+streamlit python inference.py 
 ```
-This will:
-1. Load the saved models
-2. Process new data
-3. Generate predictions
+This will give a visual interface for inference. It can:
+1. Load the saved models.
+2. Process new data.
+3. Generate predictions with both the XGBoost model and neural network model.
 
 ## License
 

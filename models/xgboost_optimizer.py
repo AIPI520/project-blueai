@@ -1,6 +1,5 @@
 from sklearn.model_selection import GridSearchCV, RandomizedSearchCV
 import xgboost as xgb
-import numpy as np
 
 class XGBoostOptimizer:
     """

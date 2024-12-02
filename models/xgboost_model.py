@@ -1,9 +1,6 @@
 from sklearn.model_selection import cross_val_score
 from sklearn.metrics import mean_absolute_error, r2_score
-from tensorflow.keras.models import save_model
-from tensorflow.keras.models import load_model
 from xgboost import XGBRegressor
-import joblib
 
 class XGBoostModel:
     """
