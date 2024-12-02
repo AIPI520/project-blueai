@@ -13,12 +13,15 @@ class XGBoostOptimizer:
         self.y_val = y_val
         
     def optimize_hyperparameters(self, cv=5):
+
         """
         Perform hyperparameter optimization using RandomizedSearchCV.
         
         Returns:
             dict: Best parameters
+            
         """
+
         param_dist = {
             'n_estimators': [100, 200, 300, 400, 500],
             'max_depth': [3, 4, 5, 6, 7, 8],

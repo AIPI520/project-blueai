@@ -97,6 +97,12 @@ def main():
     xgb_model.save_model()
     dl_model.save_model()
     
+    xgb_model = XGBoostModel()
+    xgb_model.load_model()
+
+    dl_model = DeepLearningModel(input_dim=20)
+    dl_model.load_model()
+
     # Evaluate both models
     print("\nEvaluating models on test set...")
     xgb_metrics = xgb_model.evaluate(X_test_final, y_test)
@@ -106,6 +112,7 @@ def main():
     print(f"XGBoost MAE: {xgb_metrics['mae']}")
     print(f"XGBoost R2 Score: {xgb_metrics['r2']}")
     print(f"Deep Learning MAE: {dl_metrics['mae']}")
+    print(f"Deep Learning R2 Score: {dl_metrics['r2']}")
 
 if __name__ == "__main__":
     main()

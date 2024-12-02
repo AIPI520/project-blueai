@@ -1,5 +1,7 @@
 from sklearn.model_selection import cross_val_score
 from sklearn.metrics import mean_absolute_error, r2_score
+from tensorflow.keras.models import save_model
+from tensorflow.keras.models import load_model
 from xgboost import XGBRegressor
 import joblib
 
@@ -87,8 +89,9 @@ class XGBoostModel:
     
     def save_model(self):
         """Save the trained model to disk."""
-        joblib.dump(self.model, self.model_path)
+        self.model.save_model(self.model_path)  # Save the model in XGBoost format
         
     def load_model(self):
         """Load a trained model from disk."""
-        self.model = joblib.load(self.model_path)
+        self.model = XGBRegressor()  # Re-initialize the model
+        self.model.load_model(self.model_path)  # Load the model

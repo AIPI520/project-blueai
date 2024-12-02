@@ -49,7 +49,7 @@ class DeepLearningOptimizer:
     
     def optimize_architecture(self, X_train, y_train, X_val, y_val):
         """
-        Find optimal model architecture using grid search.
+        Optimize the architecture of the Deep Learning model.
         
         Returns:
             dict: Best architecture parameters
@@ -142,7 +142,7 @@ class DeepLearningOptimizer:
                             EarlyStopping(patience=10, restore_best_weights=True),
                             ReduceLROnPlateau(factor=0.2, patience=5, min_lr=1e-6)
                         ],
-                        verbose=0
+                        verbose=0,
                     )
                     
                     val_loss = min(history.history['val_loss'])
