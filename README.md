@@ -7,7 +7,7 @@ Zihao Yang, Tony Wang, Zejun Bai, Reina Shi
 
 ## Video Presentation
         
-[Link to video presentation]
+[[Link to video presentation](https://youtu.be/9RKjHCgtLwE)]
 
 ## Project Overview 
         
