@@ -3,7 +3,7 @@ from models.xgboost_model import XGBoostModel
 from models.deep_learning_model import DeepLearningModel
 from models.xgboost_optimizer import XGBoostOptimizer
 from models.deep_learning_optimizer import DeepLearningOptimizer
-from feature_engineering.feature_optimizer import FeatureEngineer
+from feature_engineering.feature_engineer import FeatureEngineer
 import pandas as pd
 import numpy as np
 from sklearn.model_selection import train_test_split
