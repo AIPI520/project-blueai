@@ -22,57 +22,67 @@ class DeepLearningModel:
             model_path (str): Path to save/load the model
         """
         self.model_path = model_path
-        self.model = self._build_model(input_dim)
+        self.model = None
     
-    def _build_model(self, input_dim):
+    def build_model(self, params):
         """
-        Build the neural network architecture.
+        Build the neural network with given parameters.
         
         Args:
-            input_dim (int): Number of input features
-            
-        Returns:
-            model: Compiled Keras model
+            params (dict): Model parameters including architecture and hyperparameters
         """
-        model = Sequential([
-            Dense(256, activation='relu', input_dim=input_dim),
-            Dense(128, activation='relu'),
-            BatchNormalization(),
-            Dropout(0.3),
-            Dense(64, activation='relu'),
-            BatchNormalization(),
-            Dropout(0.3),
-            Dense(32, activation='relu'),
-            BatchNormalization(),
-            Dropout(0.3),
-            Dense(16, activation='relu'),
-            BatchNormalization(),
-            Dense(1)
-        ])
-        model.compile(optimizer=Adam(learning_rate=0.001), 
-                     loss='mae', 
-                     metrics=['mae'])
-        return model
+        model = Sequential()
+        
+        # First layer
+        model.add(Dense(params['first_layer_units'], 
+                       activation='relu', 
+                       input_shape=(self.input_dim,)))
+        model.add(BatchNormalization())
+        model.add(Dropout(params['dropout_rate']))
+        
+        # Hidden layers
+        for units in params['hidden_layers']:
+            model.add(Dense(units, activation='relu'))
+            model.add(BatchNormalization())
+            model.add(Dropout(params['dropout_rate']))
+        
+        # Output layer
+        model.add(Dense(1))
+        
+        # Compile model
+        model.compile(
+            optimizer=Adam(learning_rate=params['learning_rate']),
+            loss='mae',
+            metrics=['mae']
+        )
+        
+        self.model = model
     
-    def train(self, X_train, y_train, validation_split=0.2, epochs=100, batch_size=32):
+    def train(self, X_train, y_train, params, X_val=None, y_val=None, epochs=100):
         """
         Train the deep learning model.
         
         Args:
             X_train: Training features
             y_train: Training target values
-            validation_split (float): Fraction of training data to use for validation
-            epochs (int): Number of training epochs
-            batch_size (int): Batch size for training
-            
+            params: Model parameters including architecture and hyperparameters
+            X_val: Validation features (optional)
+            y_val: Validation target values (optional)
+            epochs: Number of training epochs
+        
         Returns:
             history: Training history
         """
+        self.input_dim = X_train.shape[1]
+        self.build_model(params)
+        
+        validation_data = (X_val, y_val) if X_val is not None and y_val is not None else None
+        
         history = self.model.fit(
             X_train, y_train,
-            validation_split=validation_split,
+            validation_data=validation_data,
             epochs=epochs,
-            batch_size=batch_size,
+            batch_size=params.get('batch_size', 32),
             verbose=1
         )
         return history

@@ -1,3 +1,4 @@
+# main.py
 from data_processing.preprocessor import DataPreprocessor
 from models.xgboost_model import XGBoostModel
 from models.deep_learning_model import DeepLearningModel
@@ -83,12 +84,13 @@ def main():
     # Train final Deep Learning model with optimized parameters
     print("\nTraining final Deep Learning model...")
     dl_model = DeepLearningModel(input_dim=X_train_final.shape[1])
-    dl_model.model = dl_optimizer.create_model(dl_final_params)
     dl_model.train(
-        X_train_final, y_train,
-        validation_data=(X_val_final, y_val),
-        epochs=dl_final_params.get('epochs', 100),
-        batch_size=dl_final_params.get('batch_size', 32)
+        X_train=X_train_final,
+        y_train=y_train,
+        params=dl_final_params,
+        X_val=X_val_final,
+        y_val=y_val,
+        epochs=100
     )
     
     # Save models
