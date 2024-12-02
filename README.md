@@ -149,7 +149,7 @@ The dataset used in this project contains housing transaction data with various 
   It shows that finding the best parameters with sufficient techniques to prevent overfitting to get best performance in validation set will not only better performance of the model but not harm the generalization ability in further data in this problem.  
 
 #### Unexpected
-- XGBoost outperformed the deep learning model before and after the hyperparameter Optimization in both MAE and R² Score.     
+- XGBoost outperformed the deep learning model before and after the hyperparameter optimization in both MAE and R² Score.     
 
   Possible Explanation: For this task, traditional approach with XGBoost performs better than neural network. This is potentially because this prediction involves tabular data with non-linear but relatively simple relationship between features. XGBoost is a gradient-boosted decision tree algorithm specifically designed for tabular data and it could handle feature interactions well. However, neural networks face challenge when applied to tabular data because of lack of feature interaction modeling though they can handle unstructed data well (audio, images).
 
